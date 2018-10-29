@@ -1,0 +1,7 @@
+<%= phrase('my-first-phrase') %>
+<br>
+
+<% @posts.each do |post| %>
+	POST <%= post.id %>
+	<%= phrase(post.descricao,post) %>
+<% end %>
