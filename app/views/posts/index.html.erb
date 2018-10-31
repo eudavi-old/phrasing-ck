@@ -3,5 +3,5 @@
 
 <% @posts.each do |post| %>
 	POST <%= post.id %>
-	<%= phrase(post.descricao,post) %>
+	<%= link_to 'Mostrar', post_path(post) %>
 <% end %>
