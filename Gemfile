@@ -58,3 +58,4 @@ gem 'ckeditor'
 gem "font-awesome-sass"
 gem "phrasing"
 gem "devise"
+gem "paperclip"
