@@ -1,5 +1,98 @@
-<div class="form-group">
-  <div class="col-sm-8">
-    <%= cktext_area_tag 'template_body', ckeditor: {toolbar: 'mini'} %>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="assets/custom.css">
+  <link rel="stylesheet" type="text/css" href="assets/materialize.css">
+  <link href="https://fonts.googleapis.com/css?family=Allerta+Stencil" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+</head>
+<body>
+
+  <div class="navbar">
+    <nav>
+      <div class="nav-wrapper white">
+        <a href="#!" class="brand-logo"></a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fab fa-twitter fa-sm" style="color:black;" aria-hidden="true"></i></a></li>
+          <li><a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><i class="fab fa-facebook-square fa-sm" style="color:black;"  aria-hidden="true"></i></a></li>
+          <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Telegram"><i class="fab fa-telegram fa-sm" style="color:black;"  aria-hidden="true"></i></a></li>
+          <li><a href="#" data-toggle="tooltip"  data-placement="bottom" title="Google"><i class="fab fa-google fa-sm" style="color:black;"  aria-hidden="true"></i></a></li>
+          <li><a href="#" data-toggle="tooltip" data-placement="bottom" title="Linkedin"><i class="fab fa-linkedin fa-sm" style="color:black;" aria-hidden="true"></i></a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  <div class="row white">
+    <div class="col s12 bordas center">
+      <br>
+      <a href="index.html" class="brand-logo"><img src="/assets/img/core-img/logo.png" alt=""></a>
+    </div>
+    <div class="col s12 center fonte-menu">
+      <a class="push-menu" href="#"> início </a>
+      <a class="push-menu" href="#"> sobre </a>
+      <a class="push-menu" href="#"> link3 </a>
+      <a class="push-menu" href="#"> link4 </a>
+      <a class="push-menu" href="#"> link5 </a>
+    </div>
+  </div>
+
+
+
+  <div class="row">
+   <% @posts.each do |post| %>
+   <div class="container s8 m7 center">
+    <div class="card">
+      <div class="card-image img-size">
+        <img src="<%= post.capa %>">
+        <%= link_to post.titulo, post, class: 'card-title'%>
+      </div>
+      <div class="card-content">
+        <p><%= post.resumo %></p>
+      </div>
+      <div class="card-action">
+        <%= link_to 'READ MORE', post_path(post) %>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+
+
+
+
+<footer class="page-footer white black-text">
+  <div class="container">
+    <div class="row push2">
+      <div class="col s12 fonte-menu2">
+        <a class="push-menu2" href="#"> INÍCIO </a>
+        <a class="push-menu2" href="#" > SOBRE </a>
+        <a class="push-menu2" href="#" > LINK3 </a>
+        <a class="push-menu2" href="#" > LINK4 </a>
+        <a class="push-menu2" href="#" > LINK5 </a>
+      </div>
+    </div>
+    <div class="row push">
+      <div class="col s12">
+        <ul>
+          <li><a href="#" data-tooltip="teste" data-position="top" title="Twitter" class="float-left-child"><i class="fab fa-twitter fa-lg" style="color:black;" aria-hidden="true"></i></a></li>
+          <li><a href="#" data-tooltip="teste" data-position="top" title="Facebook" class="float-left-child"><i class="fab fa-facebook-square fa-lg" style="color:black;"  aria-hidden="true"></i></a></li>
+          <li><a href="#" data-tooltip="teste" data-position="top" title="Telegram" class="float-left-child"><i class="fab fa-telegram fa-lg" style="color:black;"  aria-hidden="true"></i></a></li>
+          <li><a href="#" data-tooltip="teste" data-position="top" title="Google" class="float-left-child"><i class="fab fa-google fa-lg" style="color:black;"  aria-hidden="true"></i></a></li>
+          <li><a href="#" data-tooltip="teste" data-position="top" title="linkedin" class="float-left-child"><i class="fab fa-linkedin fa-lg" style="color:black;" aria-hidden="true"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright grey lighten-5">
+    <div class="container black-text">
+      © 2018 por Eu mesmo.
+      <!--<a class="black-text text-lighten-4 right" href="#!">More Links</a> -->
+    </div>
   </div>
 </div>
+</footer>
+
+</body>
+</html>

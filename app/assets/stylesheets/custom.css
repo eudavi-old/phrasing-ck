@@ -1,3 +1,128 @@
 .post-margin {
 	margin: 0 auto;
 }
+
+/* come on girls */
+.card {
+ width:500px;
+}
+
+.fonte-menu{
+    font-family: 'Allerta Stencil', sans-serif;
+    margin-top: 18px;
+    margin-bottom: 18px;
+}
+
+.fonte-menu2{
+    font-family: 'Allerta Stencil', sans-serif;
+}
+
+.push-menu{
+    padding-left: 13px;
+    color:black;
+}
+
+.push{
+ padding-left: 280px;
+ padding-top: 30px;
+ padding-bottom: 15px;
+}
+
+.push2{
+ padding-left: 200px;
+ padding-top: 30px;
+
+}
+
+.push-menu2{
+    padding-left: 50px;
+    color:black;
+} 
+
+.float-left-child {
+  float: left;
+  padding-left: 50px;
+}
+
+.bordas{
+    border-top-style: solid;
+    border-top-color: #B4C5E4;
+    border-top-width: 2px;
+
+    border-bottom-style: solid;
+    border-bottom-color: #B4C5E4;
+    border-bottom-width: 2px;
+}
+* {
+    box-sizing: border-box;
+} 
+
+/* Add a gray background color with some padding */
+body {
+    font-family: Arial;
+
+    background: #f1f1f1;
+}
+
+/* Header/Blog Title */
+.header {
+    padding: 30px;
+    font-size: 40px;
+    margin-bottom: 10px;
+    text-align: center;
+    background: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.card-menu{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+}
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {   
+    float: left;
+    width: 75%;
+    margin-bottom: 10px;
+}
+
+/* Fake image */
+.fakeimg {
+    background-color: #aaa;
+    width: 75%;
+    padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card {
+     background-color: white;
+     padding: 20px;
+     margin-top: 20px;
+     margin-bottom: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+    margin-bottom: 10px;
+}
+
+/* Footer */
+.footer {
+    padding: 20px;
+    text-align: center;
+    background: #ddd;
+    margin-top: 20px;
+
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+    .leftcolumn, .rightcolumn {   
+        width: 100%;
+        padding: 0;
+    }
+}

@@ -13,6 +13,7 @@ class PostsController < ApplicationController
 
 	def create
 		@post = Post.new(post_params)
+		@post.update_attribute(:descricao, params[:descricao][0])
 		if @post.save!
 			render json: @post
 		end
@@ -27,6 +28,6 @@ class PostsController < ApplicationController
 	end
 
 	def post_params
-		params.permit(:descricao)
+		params.require(:post).permit(:titulo, :resumo, :capa)
 	end
 end

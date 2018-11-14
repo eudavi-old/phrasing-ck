@@ -1,7 +1,24 @@
 <%= form_with(model: post, local: true) do |form| %>
 	<div class="form-group">
 		<div class="col-sm-8">
-			<%= cktext_area_tag 'descricao', @post.descricao, ckeditor: {toolbar: 'Full'} %>
+			<div>
+				<label>Titulo</label>
+				<%= form.text_field :titulo %>	
+			</div>
+			 
+			<div>
+				<label>Resumo</label>
+				<%= form.text_area :resumo %>	
+			</div>
+
+			<div>
+				<label>Capa</label>
+				<%= form.text_field :capa %>	
+			</div>
+
+			 <div>
+				<%= cktext_area :descricao, @post.descricao, ckeditor: {toolbar: 'Full'} %> 	
+			 </div>
 		</div>
 	</div>
 
