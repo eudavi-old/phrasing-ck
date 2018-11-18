@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   
   resources :posts
   get "/:page" => "pages#show"
-  root "posts#index"
+  root "pages#show", page: "home"
 
 end
