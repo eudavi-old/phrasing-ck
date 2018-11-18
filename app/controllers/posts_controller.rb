@@ -2,7 +2,8 @@ class PostsController < ApplicationController
 
 	before_action :set_post, only: [:show]
 	before_action :authenticate_user!
-
+	render :layout => false
+	
 	def index
 		@posts = Post.all
 	end
@@ -19,7 +20,8 @@ class PostsController < ApplicationController
 		end
 	end
 
-	def show ;end
+	def show 
+		;end
 
 	private
 

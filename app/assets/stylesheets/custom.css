@@ -7,6 +7,12 @@
  width:500px;
 }
 
+.logo-size {
+  width: 215px;
+  height: 115px;
+}
+
+
 .fonte-menu{
     font-family: 'Allerta Stencil', sans-serif;
     margin-top: 18px;
