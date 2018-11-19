@@ -1,3 +1,154 @@
+.post-margin {
+	margin: 0 auto;
+    margin-right: 75px;
+    margin-left: 75px;
+}
+
+.titulo{
+    font-weight: bold;
+    color: #00CAE5;
+}
+.pic{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+/* come on girls */
+.card {
+ width: 500px;
+}
+
+.card-post{
+    width: 900px !important;
+}
+
+.justificar{
+    text-align: justify;
+    text-justify: inter-word;
+}
+.logo-size {
+  width: 215px;
+  height: 115px;
+}
+
+
+.fonte-menu{
+    font-family: 'Allerta Stencil', sans-serif;
+    margin-top: 18px;
+    margin-bottom: 18px;
+}
+
+.fonte-menu2{
+    font-family: 'Allerta Stencil', sans-serif;
+}
+
+.push-menu{
+    padding-left: 13px;
+    color:black;
+}
+
+.push{
+ padding-left: 280px;
+ padding-top: 30px;
+ padding-bottom: 15px;
+}
+
+.push2{
+ padding-left: 200px;
+ padding-top: 30px;
+
+}
+
+.push-menu2{
+    padding-left: 50px;
+    color:black;
+} 
+
+.float-left-child {
+  float: left;
+  padding-left: 50px;
+}
+
+.bordas{
+    border-top-style: solid;
+    border-top-color: #B4C5E4;
+    border-top-width: 2px;
+
+    border-bottom-style: solid;
+    border-bottom-color: #B4C5E4;
+    border-bottom-width: 2px;
+}
+* {
+    box-sizing: border-box;
+} 
+
+/* Add a gray background color with some padding */
+body {
+    font-family: Arial;
+    background: #f1f1f1;
+}
+
+/* Header/Blog Title */
+.header {
+    padding: 30px;
+    font-size: 40px;
+    margin-bottom: 10px;
+    text-align: center;
+    background: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.card-menu{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+}
+
+/* Create two unequal columns that floats next to each other */
+/* Left column */
+.leftcolumn {   
+    float: left;
+    width: 75%;
+    margin-bottom: 10px;
+}
+
+/* Fake image */
+.fakeimg {
+    background-color: #aaa;
+    width: 75%;
+    padding: 20px;
+}
+
+/* Add a card effect for articles */
+.card {
+     background-color: white;
+     padding: 20px;
+     margin-top: 20px;
+     margin-bottom: 10px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+    margin-bottom: 10px;
+}
+
+/* Footer */
+.footer {
+    padding: 20px;
+    text-align: center;
+    background: #ddd;
+    margin-top: 20px;
+
+}
+
+/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+    .leftcolumn, .rightcolumn {   
+        width: 100%;
+        padding: 0;
+    }
+}
 /* line 6, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/materialize-sass-1.0.0/assets/stylesheets/materialize/components/_color-classes.scss */
 .materialize-red {
   background-color: #e51c23 !important;
@@ -9835,29 +9986,39 @@ input[type=range]::-ms-thumb {
  * CSS code based on:
  * https://google.github.io/material-design-icons/#icon-font-for-the-web
  */
+
+
+
+
+
+
 /* Use the font */
+
 @font-face {
   font-family: 'Material Icons';
   font-style: normal;
   font-weight: 400;
-  src: url("/assets/MaterialIcons-Regular-8c998b4a9c0acbb9fe5dd572c206a5a33fdd5ca2b58db87fc3b893beac85068d.eot");
-  /* For IE6-8 */
-  src: local("Material Icons"), local("MaterialIcons-Regular"), url("/assets/MaterialIcons-Regular-a87d66c91b2e7dc5530aef76c03bd6a3d25ea5826110bf4803b561b811cc8726.woff2") format("woff2"), url("/assets/MaterialIcons-Regular-c4a1baec300d09e03a8380b85918267ee80faae8e00c6c56b48e2e74b1d9b38d.woff") format("woff"), url("/assets/MaterialIcons-Regular-b7f4a3ab562048f28dd1fa691601bc43363a61d0f876d16d8316c52e4f32d696.ttf") format("truetype");
+  src: url('/assets/MaterialIcons-Regular-8c998b4a9c0acbb9fe5dd572c206a5a33fdd5ca2b58db87fc3b893beac85068d.eot'); /* For IE6-8 */
+  src: local('Material Icons'),
+       local('MaterialIcons-Regular'),
+       url('/assets/MaterialIcons-Regular-a87d66c91b2e7dc5530aef76c03bd6a3d25ea5826110bf4803b561b811cc8726.woff2') format('woff2'),
+       url('/assets/MaterialIcons-Regular-c4a1baec300d09e03a8380b85918267ee80faae8e00c6c56b48e2e74b1d9b38d.woff') format('woff'),
+       url('/assets/MaterialIcons-Regular-b7f4a3ab562048f28dd1fa691601bc43363a61d0f876d16d8316c52e4f32d696.ttf') format('truetype');
 }
+
 /* Base class */
-/* line 26, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/material_icons-2.2.1/app/assets/stylesheets/material_icons.css.erb */
 .material-icons,
 .mi {
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;
-  /* Preferred icon size */
+  font-size: 24px;  /* Preferred icon size */
   display: inline-block;
   width: 1em;
   height: 1em;
   line-height: 1;
   text-transform: none;
+
   /* Support for all WebKit browsers. */
   -webkit-font-smoothing: antialiased;
   /* Support for Safari and Chrome. */
@@ -9870,80 +10031,47 @@ input[type=range]::-ms-thumb {
 }
 
 /* Rules for sizing the icon. */
-/* line 49, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/material_icons-2.2.1/app/assets/stylesheets/material_icons.css.erb */
-.material-icons.md-18, .mi.md-18 {
-  font-size: 18px;
-}
-
-/* line 50, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/material_icons-2.2.1/app/assets/stylesheets/material_icons.css.erb */
-.material-icons.md-24, .mi.md-24 {
-  font-size: 24px;
-}
-
-/* line 51, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/material_icons-2.2.1/app/assets/stylesheets/material_icons.css.erb */
-.material-icons.md-36, .mi.md-36 {
-  font-size: 36px;
-}
-
-/* line 52, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/material_icons-2.2.1/app/assets/stylesheets/material_icons.css.erb */
-.material-icons.md-48, .mi.md-48 {
-  font-size: 48px;
-}
+.material-icons.md-18, .mi.md-18 { font-size: 18px; }
+.material-icons.md-24, .mi.md-24 { font-size: 24px; }
+.material-icons.md-36, .mi.md-36 { font-size: 36px; }
+.material-icons.md-48, .mi.md-48 { font-size: 48px; }
 
 /* Rules for using icons as black on a light background. */
-/* line 55, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/material_icons-2.2.1/app/assets/stylesheets/material_icons.css.erb */
-.material-icons.md-dark, .mi.md-dark {
-  color: rgba(0, 0, 0, 0.54);
-}
-
-/* line 56, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/material_icons-2.2.1/app/assets/stylesheets/material_icons.css.erb */
-.material-icons.md-dark.md-inactive, .mi.md-dark.md-inactive {
-  color: rgba(0, 0, 0, 0.26);
-}
+.material-icons.md-dark, .mi.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive, .mi.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
 
 /* Rules for using icons as white on a dark background. */
-/* line 59, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/material_icons-2.2.1/app/assets/stylesheets/material_icons.css.erb */
-.material-icons.md-light, .mi.md-light {
-  color: white;
-}
-
-/* line 60, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/material_icons-2.2.1/app/assets/stylesheets/material_icons.css.erb */
-.material-icons.md-light.md-inactive, .mi.md-inactive {
-  color: rgba(255, 255, 255, 0.3);
-}
+.material-icons.md-light, .mi.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive, .mi.md-inactive { color: rgba(255, 255, 255, 0.3); }
 
 /* Rules to rotate items */
-/* line 63, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/material_icons-2.2.1/app/assets/stylesheets/material_icons.css.erb */
 .material-icons.r90, .mi.r90 {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
   -webkit-transform: rotate(90deg);
   transform: rotate(90deg);
 }
-
-/* line 69, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/material_icons-2.2.1/app/assets/stylesheets/material_icons.css.erb */
 .material-icons.r180, .mi.r180 {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
   -webkit-transform: rotate(180deg);
   transform: rotate(180deg);
 }
-
-/* line 75, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/material_icons-2.2.1/app/assets/stylesheets/material_icons.css.erb */
 .material-icons.r270, .mi.r270 {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
   -webkit-transform: rotate(270deg);
   transform: rotate(270deg);
 }
-
-/* line 81, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/material_icons-2.2.1/app/assets/stylesheets/material_icons.css.erb */
 .material-icons.flip-horizontal, .mi.flip-horizontal {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1);
   -webkit-transform: scale(-1, 1);
   transform: scale(-1, 1);
 }
-
-/* line 87, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/material_icons-2.2.1/app/assets/stylesheets/material_icons.css.erb */
 .material-icons.flip-vertical, .mi.flip-vertical {
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1);
   -webkit-transform: scale(1, -1);
   transform: scale(1, -1);
 }
+/*
+
+
+
+*/
