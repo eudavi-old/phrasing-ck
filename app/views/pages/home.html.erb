@@ -1,20 +1,20 @@
 <div class="container">
   <div class="row">
-   <% @posts.each do |post| %>
-   <div class="col s8">
-    <div class="card">
-      <div class="card-image">
-        <img src="<%= post.capa %>">
-        <%= link_to post.titulo, post, class: 'card-title'%>
-      </div>
-      <div class="card-content">
-        <p><%= post.resumo %></p>
-      </div>
-      <div class="card-action">
-        <%= link_to 'READ MORE', post_path(post) %>
+    <% @posts.each do |post| %>
+    <div class="col s8 push-s2">
+      <div class="card">
+        <div class="card-image">
+          <img src="<%= post.capa %>">
+          <%= link_to post.titulo, post, class: 'card-title fonte-card'%>
+        </div>
+        <div class="card-content">
+          <p><%= post.resumo %></p>
+        </div>
+        <div class="card-action">
+          <%= link_to 'READ MORE', post_path(post) %>
+        </div>
       </div>
     </div>
+      <% end %>
   </div>
-  <% end %>
-</div>
 </div>
