@@ -12,13 +12,10 @@
     margin-top: 30px;
     margin-bottom: 30px;
 }
-/* come on girls */
-.card {
- width: 500px;
-}
 
-.card-post{
-    width: 900px !important;
+img {
+    width: 100%;
+    height: auto;
 }
 
 .justificar{
@@ -29,7 +26,6 @@
   width: 215px;
   height: 115px;
 }
-
 
 .fonte-menu{
     font-family: 'Allerta Stencil', sans-serif;
