@@ -1,12 +1,30 @@
 .post-margin {
 	margin: 0 auto;
+    margin-right: 75px;
+    margin-left: 75px;
 }
 
+.titulo{
+    font-weight: bold;
+    color: #00CAE5;
+}
+.pic{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
 /* come on girls */
 .card {
- width:500px;
+ width: 500px;
 }
 
+.card-post{
+    width: 900px !important;
+}
+
+.justificar{
+    text-align: justify;
+    text-justify: inter-word;
+}
 .logo-size {
   width: 215px;
   height: 115px;

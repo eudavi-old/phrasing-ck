@@ -1,5 +1,17 @@
-<div class="container">
-	<div class="post-margin">
-		<%= phrase(@post.descricao,@post) %>
+<div class="row">
+	<div class="col s12 push-s2">
+		<div class="card card-post">
+			<div class="post-margin">
+				<div>
+					<h5 class="center titulo"> <%= phrase(@post.titulo,@post) %></h5> 
+				</div>
+				<div class="center pic">
+					<img src="<%= phrase(@post.capa,@post) %>"> </img>
+				</div>
+				<div class="justificar">
+					<%= phrase(@post.descricao,@post) %>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
