@@ -6,13 +6,13 @@
         <div class="card">
           <div class="card-image">
             <img src="<%= post.capa %>">
-            <%= link_to post.titulo, post, class: 'card-title fonte-card'%>
+            <%= link_to post.titulo, post, class: 'card-title cor-titulo fonte-card flow-text'%>
           </div>
           <div class="card-content">
             <p><%= post.resumo %></p>
           </div>
           <div class="card-action">
-            <%= link_to 'READ MORE', post_path(post) %>
+            <%= link_to 'LER MAIS', post_path(post), class: 'right blue-text text-lighten-2 card-botao' %>
           </div>
         </div>
       </div>
@@ -27,13 +27,13 @@
         <div class="card">
           <div class="card-image">
             <img src="<%= post.capa %>">
-            <%= link_to post.titulo, post, class: 'card-title fonte-card flow-text'%>
+            <%= link_to post.titulo, post, class: 'card-title cor-titulo cor-titulo fonte-card flow-text'%>
           </div>
           <div class="card-content">
             <p class="flow-text"><%= post.resumo %></p>
           </div>
           <div class="card-action">
-            <%= link_to 'READ MORE', post_path(post) %>
+            <%= link_to 'LER MAIS', post_path(post), class: 'right blue-text text-lighten-2 card-botao' %>
           </div>
         </div>
       </div>
