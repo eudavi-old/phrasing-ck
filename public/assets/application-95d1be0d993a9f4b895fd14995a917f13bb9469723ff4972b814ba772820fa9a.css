@@ -1,8 +1,3 @@
-.post-margin {
-	margin: 0 auto;
-    margin-right: 75px;
-    margin-left: 75px;
-}
 
 .titulo{
     font-weight: bold;
@@ -12,6 +7,7 @@
     margin-top: 30px;
     margin-bottom: 30px;
 }
+
 
 img {
     width: 100%;
@@ -33,23 +29,52 @@ img {
     margin-bottom: 18px;
 }
 
-.fonte-card{
-    font-size: 20px !important;
-}
 
 .fonte-menu2{
     font-family: 'Allerta Stencil', sans-serif;
 }
 
 .push-menu{
-    padding-left: 30px;
+    padding-left: 10px;
     color:black;
 }
 
-.push-menu2{
-    padding-left: 40px;
-    color:black;
-} 
+@media (min-width: 1px) and (max-width: 999px) {
+    .post-margin {
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+
+
+}
+
+@media (min-width: 1000px) {
+    .post-margin {
+     margin-right: 75px;
+     margin-left: 75px;
+ }
+
+}
+
+@media  (min-width: 1px) and (max-width: 399px) {
+    .fonte-card{
+        font-size: 14px !important;
+    }
+}
+
+
+@media  (max-width: 599px) and (min-width: 400px) {
+    .fonte-card{
+        font-size: 20px !important;
+    }
+}
+
+@media  (max-width: 1000px) and (min-width: 600px) {
+    .fonte-card{
+        font-size: 27px !important;
+    }
+}
+
 
 .float-left-child {
   float: left;
@@ -85,13 +110,7 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
-.card-menu{
-  font-family: 'Montserrat', sans-serif;
-  font-size: 20px;
-}
 
-/* Create two unequal columns that floats next to each other */
-/* Left column */
 .leftcolumn {   
     float: left;
     width: 75%;
@@ -107,10 +126,10 @@ body {
 
 /* Add a card effect for articles */
 .card {
-     background-color: white;
-     padding: 20px;
-     margin-top: 20px;
-     margin-bottom: 10px;
+ background-color: white;
+ padding: 20px;
+ margin-top: 20px;
+ margin-bottom: 10px;
 }
 
 /* Clear floats after the columns */
