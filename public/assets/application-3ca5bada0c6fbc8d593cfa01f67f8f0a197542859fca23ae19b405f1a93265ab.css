@@ -2,10 +2,7 @@
 .titulo{
     font-weight: bold;
     color: #00CAE5 !important;
-}
-.pic{
-    margin-top: 30px;
-    margin-bottom: 30px;
+    padding-bottom: 10px;
 }
 
 .card-botao{
@@ -16,6 +13,11 @@ img {
     width: 100%;
     height: auto;
 }
+
+/*iframe {
+    height: 383px !important;
+    width: 90% !important;
+}*/
 
 .justificar{
     text-align: justify;
@@ -53,11 +55,11 @@ img {
         margin-left: 20px;
     }
 
-
 }
 
 @media (min-width: 1000px) {
     .post-margin {
+    padding-top:20px;
      margin-right: 75px;
      margin-left: 75px;
  }
@@ -90,11 +92,6 @@ img {
 }
 
 
-.float-left-child {
-  float: left;
-  padding-left: 50px;
-}
-
 .bordas{
     border-top-style: solid;
     border-top-color: #B4C5E4;
@@ -104,53 +101,18 @@ img {
     border-bottom-color: #B4C5E4;
     border-bottom-width: 2px;
 }
-* {
-    box-sizing: border-box;
-} 
 
-/* Add a gray background color with some padding */
+
 body {
-    font-family: 'PT Sans', sans-serif;
+    font-family: 'PT Serif', serif;
     background: #f1f1f1;
 }
 
-/* Header/Blog Title */
-.header {
-    padding: 30px;
-    font-size: 40px;
-    margin-bottom: 10px;
-    text-align: center;
-    background: white;
-    font-family: 'Montserrat', sans-serif;
-}
-
-
-.leftcolumn {   
-    float: left;
-    width: 75%;
-    margin-bottom: 10px;
-}
-
-/* Fake image */
-.fakeimg {
-    background-color: #aaa;
-    width: 75%;
-    padding: 20px;
-}
-
-/* Add a card effect for articles */
 .card {
  background-color: white;
  padding-bottom: 20px;
 }
 
-/* Clear floats after the columns */
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
-    margin-bottom: 10px;
-}
 
 /* Footer */
 .footer {
@@ -161,13 +123,6 @@ body {
 
 }
 
-/* Responsive layout - when the screen is less than 800px wide, make the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 800px) {
-    .leftcolumn, .rightcolumn {   
-        width: 100%;
-        padding: 0;
-    }
-}
 /* line 6, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/materialize-sass-1.0.0/assets/stylesheets/materialize/components/_color-classes.scss */
 .materialize-red {
   background-color: #e51c23 !important;
