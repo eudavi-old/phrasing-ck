@@ -1,8 +1,587 @@
+/* line 1, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_fonts.scss */
+#phrasing-edit-mode-bubble {
+  webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  background: white;
+  color: grey;
+  border: 2px solid #EFEFEF;
+  position: fixed;
+  width: 130px;
+  height: 135px;
+  bottom: 10px;
+  right: 10px;
+  z-index: 9999;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  border-radius: 10px;
+}
+/* line 2, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_fonts.scss */
+#phrasing-edit-mode-bubble *, #phrasing-edit-mode-bubble *:after, #phrasing-edit-mode-bubble *:before {
+  webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+/* line 23, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_fonts.scss */
+#phrasing-edit-mode-bubble p {
+  line-height: 20px;
+}
+/* line 26, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_fonts.scss */
+#phrasing-edit-mode-bubble ::-moz-selection {
+  color: grey;
+  background: white;
+}
+#phrasing-edit-mode-bubble ::selection {
+  color: grey;
+  background: white;
+}
+/* line 28, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_fonts.scss */
+#phrasing-edit-mode-bubble #phrasing-edit-mode, #phrasing-edit-mode-bubble #phrasing-saved-status, #phrasing-edit-mode-bubble #phrasing-edit-all-phrases {
+  height: 32px;
+  margin-top: 10px;
+}
+/* line 33, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_fonts.scss */
+#phrasing-edit-mode-bubble #phrasing-edit-mode-headline p, #phrasing-edit-mode-bubble #phrasing-edit-all-phrases-headline p, #phrasing-edit-mode-bubble #phrasing-saved-status-headline p {
+  display: inline;
+}
+/* line 38, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_fonts.scss */
+#phrasing-edit-mode-bubble #phrasing-edit-mode-headline {
+  height: 30px;
+  width: 45px;
+  float: left;
+  padding-left: 15px;
+  padding-top: 5px;
+}
+/* line 45, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_fonts.scss */
+#phrasing-edit-mode-bubble #phrasing-onoffswitch {
+  float: left;
+}
+/* line 49, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_fonts.scss */
+#phrasing-edit-mode-bubble .onoffswitch {
+  position: relative;
+  width: 60px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+/* line 52, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_fonts.scss */
+#phrasing-edit-mode-bubble .onoffswitch .onoffswitch-checkbox {
+  display: none;
+}
+/* line 55, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_fonts.scss */
+#phrasing-edit-mode-bubble .onoffswitch .onoffswitch-label {
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid #CCCCCC;
+  border-radius: 5px;
+}
+/* line 59, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_fonts.scss */
+#phrasing-edit-mode-bubble .onoffswitch .onoffswitch-inner {
+  width: 200%;
+  margin-left: -100%;
+  transition: margin 0.3s ease-in 0s;
+}
+/* line 63, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_fonts.scss */
+#phrasing-edit-mode-bubble .onoffswitch .onoffswitch-inner:before, #phrasing-edit-mode-bubble .onoffswitch .onoffswitch-inner:after {
+  float: left;
+  width: 50%;
+  height: 25px;
+  padding: 0;
+  line-height: 25px;
+  font-size: 40px;
+  color: white;
+  font-family: Trebuchet, Arial, sans-serif;
+  font-weight: bold;
+  box-sizing: border-box;
+  content: "";
+}
+/* line 68, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_fonts.scss */
+#phrasing-edit-mode-bubble .onoffswitch .onoffswitch-inner:before {
+  padding-left: 10px;
+  background-color: #56AE45;
+}
+/* line 72, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_fonts.scss */
+#phrasing-edit-mode-bubble .onoffswitch .onoffswitch-inner:after {
+  padding-right: 10px;
+  background-color: #CCCCCC;
+  text-align: right;
+}
+/* line 78, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_fonts.scss */
+#phrasing-edit-mode-bubble .onoffswitch .onoffswitch-switch {
+  width: 27px;
+  margin: 0px;
+  background: #FFFFFF;
+  border: 3px solid #CCCCCC;
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 29px;
+  transition: all 0.3s ease-in 0s;
+  background-image: linear-gradient(center top, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+}
+/* line 92, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_fonts.scss */
+#phrasing-edit-mode-bubble .onoffswitch .onoffswitch-checkbox:checked + .onoffswitch-label {
+  border: 2px solid #56AE45;
+}
+/* line 94, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_fonts.scss */
+#phrasing-edit-mode-bubble .onoffswitch .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+  margin-left: 0;
+}
+/* line 97, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_fonts.scss */
+#phrasing-edit-mode-bubble .onoffswitch .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+  right: 0px;
+  border: 3px solid #56AE45;
+}
+/* line 104, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_fonts.scss */
+#phrasing-edit-mode-bubble #phrasing-saved-status-headline {
+  height: 30px;
+  width: 45px;
+  float: left;
+  padding-left: 15px;
+  padding-top: 5px;
+}
+/* line 111, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_fonts.scss */
+#phrasing-edit-mode-bubble #phrasing-saved-status-indicator {
+  float: left;
+}
+/* line 114, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_fonts.scss */
+#phrasing-edit-mode-bubble #phrasing-saved-status-indicator-circle {
+  background-color: #56AE45;
+  width: 20px;
+  height: 20px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+/* line 123, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_fonts.scss */
+#phrasing-edit-mode-bubble #phrasing-edit-all-phrases-headline {
+  height: 30px;
+  width: 45px;
+  float: left;
+  padding-left: 15px;
+  padding-top: 5px;
+}
+/* line 130, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_fonts.scss */
+#phrasing-edit-mode-bubble #phrasing-edit-all-phrases-icon-container {
+  float: left;
+}
+/* line 132, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_fonts.scss */
+#phrasing-edit-mode-bubble #phrasing-edit-all-phrases-icon-container .phrasing-edit-all-phrases-icon {
+  margin-left: 10px;
+  margin-top: 7px;
+}
+
+/* line 5, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_edit_mode_bubble.scss */
+#phrasing-edit-mode-bubble {
+  webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  background: white;
+  color: grey;
+  border: 2px solid #EFEFEF;
+  position: fixed;
+  width: 130px;
+  height: 135px;
+  bottom: 10px;
+  right: 10px;
+  z-index: 9999;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  border-radius: 10px;
+}
+/* line 6, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_edit_mode_bubble.scss */
+#phrasing-edit-mode-bubble *, #phrasing-edit-mode-bubble *:after, #phrasing-edit-mode-bubble *:before {
+  webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+/* line 27, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_edit_mode_bubble.scss */
+#phrasing-edit-mode-bubble p {
+  line-height: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+/* line 32, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_edit_mode_bubble.scss */
+#phrasing-edit-mode-bubble ::-moz-selection {
+  color: grey;
+  background: white;
+}
+#phrasing-edit-mode-bubble ::selection {
+  color: grey;
+  background: white;
+}
+/* line 34, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_edit_mode_bubble.scss */
+#phrasing-edit-mode-bubble #phrasing-edit-mode, #phrasing-edit-mode-bubble #phrasing-saved-status, #phrasing-edit-mode-bubble #phrasing-edit-all-phrases {
+  height: 32px;
+  margin-top: 10px;
+}
+/* line 39, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_edit_mode_bubble.scss */
+#phrasing-edit-mode-bubble #phrasing-edit-mode-headline p, #phrasing-edit-mode-bubble #phrasing-edit-all-phrases-headline p, #phrasing-edit-mode-bubble #phrasing-saved-status-headline p {
+  display: inline;
+}
+/* line 44, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_edit_mode_bubble.scss */
+#phrasing-edit-mode-bubble #phrasing-edit-mode-headline {
+  height: 30px;
+  width: 45px;
+  float: left;
+  padding-left: 15px;
+  padding-top: 5px;
+}
+/* line 51, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_edit_mode_bubble.scss */
+#phrasing-edit-mode-bubble #phrasing-onoffswitch {
+  float: left;
+}
+/* line 55, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_edit_mode_bubble.scss */
+#phrasing-edit-mode-bubble .onoffswitch {
+  position: relative;
+  width: 60px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+/* line 58, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_edit_mode_bubble.scss */
+#phrasing-edit-mode-bubble .onoffswitch .onoffswitch-checkbox {
+  display: none;
+}
+/* line 61, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_edit_mode_bubble.scss */
+#phrasing-edit-mode-bubble .onoffswitch .onoffswitch-label {
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid #CCCCCC;
+  border-radius: 5px;
+}
+/* line 65, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_edit_mode_bubble.scss */
+#phrasing-edit-mode-bubble .onoffswitch .onoffswitch-inner {
+  width: 200%;
+  margin-left: -100%;
+  transition: margin 0.3s ease-in 0s;
+}
+/* line 69, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_edit_mode_bubble.scss */
+#phrasing-edit-mode-bubble .onoffswitch .onoffswitch-inner:before, #phrasing-edit-mode-bubble .onoffswitch .onoffswitch-inner:after {
+  float: left;
+  width: 50%;
+  height: 25px;
+  padding: 0;
+  line-height: 25px;
+  font-size: 40px;
+  color: white;
+  font-family: Trebuchet, Arial, sans-serif;
+  font-weight: bold;
+  box-sizing: border-box;
+  content: "";
+}
+/* line 74, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_edit_mode_bubble.scss */
+#phrasing-edit-mode-bubble .onoffswitch .onoffswitch-inner:before {
+  padding-left: 10px;
+  background-color: #56AE45;
+}
+/* line 78, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_edit_mode_bubble.scss */
+#phrasing-edit-mode-bubble .onoffswitch .onoffswitch-inner:after {
+  padding-right: 10px;
+  background-color: #CCCCCC;
+  text-align: right;
+}
+/* line 84, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_edit_mode_bubble.scss */
+#phrasing-edit-mode-bubble .onoffswitch .onoffswitch-switch {
+  width: 27px;
+  margin: 0px;
+  background: #FFFFFF;
+  border: 3px solid #CCCCCC;
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 29px;
+  transition: all 0.3s ease-in 0s;
+  background-image: linear-gradient(center top, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
+}
+/* line 98, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_edit_mode_bubble.scss */
+#phrasing-edit-mode-bubble .onoffswitch .onoffswitch-checkbox:checked + .onoffswitch-label {
+  border: 2px solid #56AE45;
+}
+/* line 100, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_edit_mode_bubble.scss */
+#phrasing-edit-mode-bubble .onoffswitch .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+  margin-left: 0;
+}
+/* line 103, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_edit_mode_bubble.scss */
+#phrasing-edit-mode-bubble .onoffswitch .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+  right: 0px;
+  border: 3px solid #56AE45;
+}
+/* line 110, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_edit_mode_bubble.scss */
+#phrasing-edit-mode-bubble #phrasing-saved-status-headline {
+  height: 30px;
+  width: 45px;
+  float: left;
+  padding-left: 15px;
+  padding-top: 5px;
+}
+/* line 117, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_edit_mode_bubble.scss */
+#phrasing-edit-mode-bubble #phrasing-saved-status-indicator {
+  float: left;
+}
+/* line 120, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_edit_mode_bubble.scss */
+#phrasing-edit-mode-bubble #phrasing-saved-status-indicator-circle {
+  background-color: #56AE45;
+  width: 20px;
+  height: 20px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+/* line 129, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_edit_mode_bubble.scss */
+#phrasing-edit-mode-bubble #phrasing-edit-all-phrases-headline {
+  height: 30px;
+  width: 45px;
+  float: left;
+  padding-left: 15px;
+  padding-top: 5px;
+}
+/* line 136, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_edit_mode_bubble.scss */
+#phrasing-edit-mode-bubble #phrasing-edit-all-phrases-icon-container {
+  float: left;
+}
+/* line 138, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing_edit_mode_bubble.scss */
+#phrasing-edit-mode-bubble #phrasing-edit-all-phrases-icon-container .phrasing-edit-all-phrases-icon {
+  margin-left: 10px;
+  margin-top: 7px;
+}
+
+@font-face {
+  font-family: 'icomoon';
+  src: url(/assets/icomoon-83f1baf5e101cda918ef1723a971cb9da74dde6b5d3b90acc07b194508b7009a.eot);
+  src: url(/assets/icomoon-83f1baf5e101cda918ef1723a971cb9da74dde6b5d3b90acc07b194508b7009a.eot?#iefix) format("embedded-opentype"), url(/assets/icomoon-5e34bfdab7287646e1950d74802787fd95863577aa0fc4fa100950bac9a2d162.woff) format("woff"), url(/assets/icomoon-fdf2e1109cccf75250c88a5e2547f8a8896371e99d5169e01485c04ac7bd4573.ttf) format("truetype"), url(/assets/icomoon-9900d8223a4d99c4d35953983b66a449cb2df4a9471322db912f423299cfd771.svg#icomoon) format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/*********************************************
+ * BASE STYLES
+ *********************************************/
+/*html {
+  overflow: hidden;
+}*/
+/* line 23, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+.phrasable.phrasable-on {
+  border-bottom: 1px dashed black;
+}
+/* line 26, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+.phrasable.phrasable-on a {
+  pointer-events: none;
+  cursor: default;
+}
+/* line 31, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+.phrasable.phrasable-on:focus {
+  outline: none;
+}
+/* line 35, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+.phrasable.phrasable-on:hover {
+  background-color: #fffadc;
+  cursor: pointer;
+}
+/* line 40, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+.phrasable.phrasable-on.inverse {
+  border-bottom: 1px dashed white;
+}
+/* line 43, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+.phrasable.phrasable-on.inverse:hover {
+  background-color: #333333;
+}
+
+/*blockquote {
+  border-left: 4px solid deepskyblue;
+  margin-left: -19px;
+  padding-left: 15px;
+  margin-right: 0px;
+}*/
+/* line 57, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+span.no-overflow {
+  overflow: hidden;
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+/* Used by the ui bubble to stop wrapping */
+/* line 65, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+.lengthen {
+  display: block;
+  width: 300px;
+  height: 100%;
+}
+
+/* line 71, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+.useicons {
+  -webkit-font-smoothing: antialiased;
+  font-size: 20px !important;
+  font-family: 'icomoon' !important;
+}
+
+/*.ui {
+  position: fixed;
+  padding: 20px;
+  width: 65px;
+  bottom: 0px;
+  left: 0px;
+  top: 0px;
+}
+
+.ui:hover button {
+  opacity: 0.4;
+}
+
+.ui button:hover {
+  opacity: 1;
+}*/
+/* line 94, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+.text-options button {
+  transition: opacity 400ms;
+  font-family: inherit;
+  background: none;
+  cursor: pointer;
+  font-size: 25px;
+  color: inherit;
+  opacity: 0.1;
+  padding: 0px;
+  height: 32px;
+  width: 25px;
+  border: 0px;
+}
+
+/*.quote {
+  line-height: 60px !important;
+  font-size: 49px !important;
+}*/
+/*********************************************
+ * UI BUBBLE
+ *********************************************/
+/* line 123, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+.text-options {
+  transition: opacity 250ms, margin 250ms;
+  position: absolute;
+  left: -999px;
+  top: -999px;
+  color: #fff;
+  height: 0px;
+  width: 0px;
+  z-index: 5;
+  margin-top: 5px;
+  opacity: 0;
+}
+/* line 130, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+.text-options *, .text-options *:before, .text-options *:after {
+  box-sizing: content-box;
+  -webkit-box-sizing: content-box;
+}
+/* line 144, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+.text-options.fade {
+  opacity: 0;
+  margin-top: -5px;
+}
+/* line 149, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+.text-options.active {
+  opacity: 1;
+  margin-top: 0px;
+}
+
+/* line 156, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+.text-options .options {
+  background-color: rgba(0, 0, 0, 0.9);
+  position: absolute;
+  border-radius: 5px;
+  margin-left: -48px;
+  margin-top: -46px;
+  z-index: 1000;
+  padding: 5px 4px 5px 5px;
+  width: 96px;
+  height: 40px;
+  box-sizing: border-box;
+  transition: all 300ms ease-in-out;
+}
+/* line 177, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+.text-options .options.url-mode {
+  width: 275px;
+  margin-left: -137px;
+}
+/* line 181, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+.text-options .options.url-mode .bold, .text-options .options.url-mode .options.url-mode .italic, .text-options .options.url-mode .options.url-mode .quote {
+  width: 0px;
+  overflow: hidden;
+  margin-right: 0px;
+  opacity: 0;
+}
+/* line 188, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+.text-options .options.url-mode input {
+  border-left: 2px solid transparent;
+  padding-right: 5px;
+  padding-left: 5px;
+  width: 236px;
+}
+/* line 196, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+.text-options .options .italic {
+  font-style: italic;
+}
+/* line 199, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+.text-options .options .bold, .text-options .options .italic {
+  line-height: normal;
+}
+/* line 203, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+.text-options .options button {
+  transition: all 250ms ease-in-out;
+  float: left;
+  width: 28px;
+  opacity: 0.7;
+  height: 30px;
+  border-radius: 3px;
+  margin-right: 1px;
+  font-family: 'Lora', serif;
+}
+/* line 218, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+.text-options .options button.active {
+  background-color: rgba(255, 255, 255, 0.4);
+  opacity: 1;
+}
+/* line 223, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+.text-options .options button:hover {
+  opacity: 0.95;
+}
+/* line 228, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+.text-options .options input {
+  transition: all 300ms ease-in-out;
+  border-radius: 3px;
+  overflow: hidden;
+  outline: 0px;
+  height: 30px;
+  padding: 0px;
+  margin: 0px;
+  border: 0px;
+  float: left;
+  width: 0px;
+}
+/* line 246, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+.text-options .options:before {
+  content: "";
+  border-top: 5px solid rgba(0, 0, 0, 0.9);
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+  position: absolute;
+  margin-left: -5px;
+  bottom: -15px;
+  height: 5px;
+  width: 0px;
+  left: 50%;
+}
+
+/* line 261, /root/.rbenv/versions/2.4.1/lib/ruby/gems/2.4.0/gems/phrasing-4.2.1/app/assets/stylesheets/phrasing.scss */
+.url {
+  -webkit-font-smoothing: antialiased;
+}
 
 .titulo{
     font-weight: bold;
     color: #00CAE5 !important;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
 }
 
 .card-botao{
@@ -14,10 +593,9 @@ img {
     height: auto;
 }
 
-/*iframe {
-    height: 383px !important;
-    width: 90% !important;
-}*/
+.margem{
+    margin-bottom: 20px;
+}
 
 .justificar{
     text-align: justify;
@@ -10045,6 +10623,7 @@ input[type=range]::-ms-thumb {
   transform: scale(1, -1);
 }
 /*
+
 
 
 

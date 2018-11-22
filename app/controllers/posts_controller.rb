@@ -4,7 +4,7 @@ class PostsController < ApplicationController
 	before_action :authenticate_user!, except: [:show]
 	
 	def index
-		@posts = Post.all
+		@posts = Post.all.reverse
 	end
 
 	def new
@@ -15,7 +15,7 @@ class PostsController < ApplicationController
 		@post = Post.new(post_params)
 		@post.update_attribute(:descricao, params[:descricao][0])
 		if @post.save!
-			render json: @post
+			redirect_to root_path
 		end
 	end
 
@@ -28,6 +28,6 @@ class PostsController < ApplicationController
 	end
 
 	def post_params
-		params.require(:post).permit(:titulo, :resumo, :capa)
+		params.require(:post).permit(:titulo, :resumo, :video, :capa)
 	end
 end

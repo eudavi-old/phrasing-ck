@@ -1,3 +1,4 @@
+
 <div class="hide-on-med-and-down">
 	<div class="container">
 		<div class="row">
@@ -7,17 +8,23 @@
 						<div>
 							<h5 class="center titulo"> <%= phrase(@post.titulo,@post) %></h5>
 						</div>
-						<div>
-							<img src="<%= phrase(@post.capa,@post) %>">
+						<% if (@post.video.include? "youtube.com/embed/") %>
+						<div class="video-container margem">
+							<iframe width="853" height="480" src="<%= @post.video %>" frameborder="0" allowfullscreen> p</iframe>
 						</div>
-					<div class="justificar">
-						<%= phrase(@post.descricao,@post) %>
+						<% else %>
+						<div>
+							<img class="materialboxed" src="<%= @post.capa %>">
+						</div>
+						<% end %>
+						<div class="justificar">
+							<%= phrase(@post.descricao,@post) %>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
 </div>
 <div class="hide-on-large-only ">
 	<div class="row">
@@ -26,9 +33,15 @@
 				<div>
 					<h5 class="center titulo"> <%= phrase(@post.titulo,@post) %></h5>
 				</div>
-				<div>
-					<img src="<%= phrase(@post.capa,@post) %>">
+				<% if (@post.video.include? "youtube.com/embed/") %>
+				<div class="video-container margem">
+					<iframe width="853" height="480" src="<%= @post.video %>" frameborder="0" allowfullscreen> p</iframe>
 				</div>
+				<% else %>
+				<div>
+					<img class="materialboxed" src="<%= @post.capa %>">
+				</div>
+				<% end %>
 				<div class="justificar">
 					<%= phrase(@post.descricao,@post) %>
 				</div>
@@ -36,3 +49,14 @@
 		</div>
 	</div>
 </div>
+
+
+<script>
+	$(document).ready(function() {
+		var elems = document.querySelectorAll('.materialboxed');
+		var options = []
+		var instances = M.Materialbox.init(elems, options);
+	});
+</script>
+
+<%= render 'phrasing/initializer' %>

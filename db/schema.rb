@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20181029204240) do
     t.string "capa"
     t.string "resumo"
     t.string "descricao"
+    t.string "video"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

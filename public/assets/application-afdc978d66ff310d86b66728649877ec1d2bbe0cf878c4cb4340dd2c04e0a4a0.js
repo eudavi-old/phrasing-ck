@@ -11562,6 +11562,489 @@ return jQuery;
   }
 
 })( jQuery );
+var editor = (function() {
+
+	// Editor elements
+	var headerField, contentField, cleanSlate, lastType, currentNodeList, savedSelection;
+
+	// Editor Bubble elements
+	var textOptions, optionsBox, boldButton, italicButton, quoteButton, urlButton, urlInput;
+
+
+	function init() {
+		if ($('#zenpenbubble').length){
+			lastRange = 0;
+			bindElements();
+
+			// Set cursor position
+			var range = document.createRange();
+			var selection = window.getSelection();
+			// range.setStart(headerField, 1);
+			selection.removeAllRanges();
+			selection.addRange(range);
+
+			createEventBindings();
+		}
+	}
+
+	function createEventBindings( on ) {
+
+		// Key up bindings
+		document.onkeyup = checkTextHighlighting;
+
+		// Mouse bindings
+		document.onmousedown = checkTextHighlighting;
+		document.onmouseup = function( event ) {
+
+			setTimeout( function() {
+				checkTextHighlighting( event );
+			}, 1);
+		};
+
+		// Window bindings
+		window.addEventListener( 'resize', function( event ) {
+			updateBubblePosition();
+		});
+
+		// Scroll bindings. We limit the events, to free the ui
+		// thread and prevent stuttering. See:
+		// http://ejohn.org/blog/learning-from-twitter
+		var scrollEnabled = true;
+		document.body.addEventListener( 'scroll', function() {
+
+			if ( !scrollEnabled ) {
+				return;
+			}
+
+			scrollEnabled = true;
+
+			updateBubblePosition();
+
+			return setTimeout((function() {
+				scrollEnabled = true;
+			}), 250);
+		});
+	}
+
+	function bindElements() {
+
+		contentField = document.querySelector( '.content' );
+		textOptions = document.querySelector( '.text-options' );
+
+		optionsBox = textOptions.querySelector( '.options' );
+
+		boldButton = textOptions.querySelector( '.bold' );
+		boldButton.onclick = onBoldClick;
+
+		italicButton = textOptions.querySelector( '.italic' );
+		italicButton.onclick = onItalicClick;
+
+		// quoteButton = textOptions.querySelector( '.quote' );
+		// quoteButton.onclick = onQuoteClick;
+
+		urlButton = textOptions.querySelector( '.url' );
+		urlButton.onmousedown = onUrlClick;
+
+		urlInput = textOptions.querySelector( '.url-input' );
+		urlInput.onblur = onUrlInputBlur;
+		urlInput.onkeydown = onUrlInputKeyDown;
+	}
+
+	function checkTextHighlighting( event ) {
+
+		var selection = window.getSelection();
+
+		if (event.target.className === "url-input" || (typeof event.target.classList !== 'undefined' && event.target.classList.contains("url"))) {
+			currentNodeList = findNodes( selection.focusNode );
+			updateBubbleStates();
+			return;
+		}
+
+		if (event.target.parentNode.classList != null){
+			if (event.target.parentNode.classList.contains("ui-inputs")){
+				currentNodeList = findNodes( selection.focusNode );
+				updateBubbleStates();
+				return;
+			}
+		}
+
+		// Check selections exist
+		if ( selection.isCollapsed === true && lastType === false ) {
+			onSelectorBlur();
+		}
+
+		// Text is selected
+		if ( selection.isCollapsed === false ) {
+
+			currentNodeList = findNodes( selection.focusNode );
+			// Find if highlighting is in the editable area
+			if (isContentEditable(selection.focusNode) == true) {
+				updateBubbleStates();
+				updateBubblePosition();
+
+				// Show the ui bubble
+				textOptions.className = "text-options active";
+			}
+		}
+
+		lastType = selection.isCollapsed;
+	}
+
+	function updateBubblePosition() {
+		var selection = window.getSelection();
+		var range = selection.getRangeAt(0);
+		var boundary = range.getBoundingClientRect();
+
+		textOptions.style.top = boundary.top - 5 + window.pageYOffset + "px";
+		textOptions.style.left = (boundary.left + boundary.right)/2 + "px";
+	}
+
+	function updateBubbleStates() {
+
+		// It would be possible to use classList here, but I feel that the
+		// browser support isn't quite there, and this functionality doesn't
+		// warrent a shim.
+
+		if ( hasNode( currentNodeList, 'B') ) {
+			boldButton.className = "bold active"
+		} else {
+			boldButton.className = "bold"
+		}
+
+		if ( hasNode( currentNodeList, 'I') ) {
+			italicButton.className = "italic active"
+		} else {
+			italicButton.className = "italic"
+		}
+
+		// if ( hasNode( currentNodeList, 'BLOCKQUOTE') ) {
+		// 	quoteButton.className = "quote active"
+		// } else {
+		// 	quoteButton.className = "quote"
+		// }
+
+		if ( hasNode( currentNodeList, 'A') ) {
+			urlButton.className = "url useicons active"
+		} else {
+			urlButton.className = "url useicons"
+		}
+	}
+
+	function onSelectorBlur() {
+
+		textOptions.className = "text-options fade";
+		setTimeout( function() {
+
+			if (textOptions.className == "text-options fade") {
+
+				textOptions.className = "text-options";
+				textOptions.style.top = '-999px';
+				textOptions.style.left = '-999px';
+			}
+		}, 260 )
+	}
+
+	function findNodes( element ) {
+
+		var nodeNames = {};
+
+		while ( element.parentNode ) {
+
+			nodeNames[element.nodeName] = true;
+			element = element.parentNode;
+
+			if ( element.nodeName === 'A' ) {
+				nodeNames.url = element.getAttribute("href");
+			}
+		}
+
+		return nodeNames;
+	}
+
+	function isContentEditable(element){
+		//if any of its parents has the class of 'phrasable' go hooray
+		while ( element.parentNode ) {
+			if (element.className !== undefined){
+				if (
+						element.className.indexOf("phrasable")>=0 &&
+						element.className.indexOf("phrasable-on")>=0
+				){
+					return true;
+				}
+			}
+			element = element.parentNode;
+		}
+		return false;
+	}
+
+	function hasNode( nodeList, name ) {
+		return !!nodeList[ name ];
+	}
+
+
+	function onBoldClick() {
+		document.execCommand( 'bold', false );
+	}
+
+	function onItalicClick() {
+		document.execCommand( 'italic', false );
+	}
+
+	// function onQuoteClick() {
+
+	// 	var nodeNames = findNodes( window.getSelection().focusNode );
+
+	// 	if ( hasNode( nodeNames, 'BLOCKQUOTE' ) ) {
+	// 		document.execCommand( 'formatBlock', false, 'p' );
+	// 		document.execCommand( 'outdent' );
+	// 	} else {
+	// 		document.execCommand( 'formatBlock', false, 'blockquote' );
+	// 	}
+	// }
+
+	function onUrlClick() {
+
+		if ( optionsBox.className == 'options' ) {
+
+			optionsBox.className = 'options url-mode';
+
+			// Set timeout here to debounce the focus action
+			setTimeout( function() {
+
+				var nodeNames = findNodes( window.getSelection().focusNode );
+
+				if ( hasNode( nodeNames , "A" ) ) {
+					urlInput.value = nodeNames.url;
+				} else {
+					// Symbolize text turning into a link, which is temporary, and will never be seen.
+					document.execCommand( 'createLink', false, '/' );
+				}
+
+				// Since typing in the input box kills the highlighted text we need
+				// to save this selection, to add the url link if it is provided.
+				lastSelection = window.getSelection().getRangeAt(0);
+				lastType = false;
+
+				urlInput.focus();
+
+			}, 100);
+
+		} else {
+
+			optionsBox.className = 'options';
+		}
+	}
+
+	function onUrlInputKeyDown( event ) {
+
+		if ( event.keyCode === 13 ) {
+			event.preventDefault();
+			applyURL( urlInput.value );
+			urlInput.blur();
+		}
+	}
+
+	function onUrlInputBlur( event ) {
+
+		optionsBox.className = 'options';
+		applyURL( urlInput.value );
+		urlInput.value = '';
+
+		currentNodeList = findNodes( window.getSelection().focusNode );
+		updateBubbleStates();
+	}
+
+	function applyURL( url ) {
+
+		rehighlightLastSelection();
+
+		// Unlink any current links
+		document.execCommand( 'unlink', false );
+		if (url !== "") {
+			document.execCommand( 'createLink', false, url );
+		}
+	}
+
+	function rehighlightLastSelection() {
+
+		window.getSelection().removeAllRanges();
+		window.getSelection().addRange( lastSelection );
+	}
+
+	return {
+		init: init
+	}
+
+})();
+
+var Phrasing = {
+  Bus : $({}),
+  EDIT_MODE_KEY : 'editing-mode'
+};
+
+Phrasing.isEditModeEnabled = function(){
+  return localStorage.getItem(this.EDIT_MODE_KEY) === "true";
+};
+
+function StatusBubbleWidget(options){
+  this.$statusText       = options.$statusText;
+  this.$statusIndicator  = options.$statusIndicator;
+  this.$editModeChechbox = options.$editModeChechbox;
+  this._init();
+}
+
+StatusBubbleWidget.prototype = {
+  _init : function(){
+    this.$editModeChechbox.on('change', function(){
+      if(this.checked){
+        Phrasing.Bus.trigger('phrasing:edit-mode:on');
+      }else{
+        Phrasing.Bus.trigger('phrasing:edit-mode:off');
+      }
+    });
+  },
+
+  _alterStatus : function(text, color){
+    this.$statusText.text(text);
+    this.$statusIndicator.css('background-color', color);
+  },
+
+  saving : function(){
+    this._alterStatus('Saving', 'orange');
+  },
+
+  saved : function(){
+    this._alterStatus('Saved', '#56AE45');
+  },
+
+  error : function(){
+    this._alterStatus('Error', 'red');
+  }
+};
+
+var phrasing_setup = function(){
+  var statusBubbleWidget = new StatusBubbleWidget({
+    $statusText       : $('#phrasing-edit-mode-bubble #phrasing-saved-status-headline p'),
+    $statusIndicator  : $('#phrasing-saved-status-indicator-circle'),
+    $editModeChechbox : $('#edit-mode-onoffswitch')
+  });
+
+  Phrasing.Bus.on('phrasing:edit-mode:on', function(){
+    $('.phrasable').addClass("phrasable-on").attr("contenteditable", 'true');
+    localStorage.setItem(Phrasing.EDIT_MODE_KEY, 'true');
+    disable_links();
+  });
+
+  Phrasing.Bus.on('phrasing:edit-mode:off', function(){
+    $('.phrasable').removeClass("phrasable-on").attr("contenteditable", "false");
+    localStorage.setItem(Phrasing.EDIT_MODE_KEY, "false");
+    enable_links();
+  });
+
+  // Initialize the editing bubble
+  editor.init();
+
+  // Making sure to send csrf token from layout file.
+  $(document).ajaxSend(function(e, xhr, options) {
+    var token = $("meta[name='csrf-token']").attr("content");
+    xhr.setRequestHeader("X-CSRF-Token", token);
+  });
+
+  // Hash size function
+  Object.size = function(obj){
+    var size = 0, key;
+    for (key in obj) { if (obj.hasOwnProperty(key)) size++; }
+    return size;
+  };
+
+  // Trigger AJAX on textchange
+  var userTriggeredPhrasingDOMChange = true;
+  var timer = {};
+  var timer_status = {};
+
+  $('.phrasable').on('DOMNodeInserted DOMNodeRemoved DOMCharacterDataModified', function(e){
+    if (userTriggeredPhrasingDOMChange === false){
+      return;
+    }
+
+    statusBubbleWidget.saving();
+
+    var record = this;
+
+    clearTimeout(timer[$(record).data("url")]);
+    timer_status[$(record).data("url")] = 0;
+
+    timer[$(record).data("url")] = setTimeout(function(){
+      savePhraseViaAjax(record);
+      delete timer_status[$(record).data("url")];
+    },2500);
+
+    timer_status[$(record).data("url")] = 1;
+  });
+
+  // AJAX Request
+  function savePhraseViaAjax(record){
+
+    var url = $(record).data("url");
+
+    var content = record.innerHTML;
+
+    if(content.length === 0){
+      content = "Empty";
+    }
+
+    $.ajax({
+      type: "PUT",
+      url: url,
+      data: { new_value: content },
+      success: function(e){
+        userTriggeredPhrasingDOMChange = false;
+        if(content === "Empty"){
+          $('span.phrasable[data-url="'+ url +'"]').html(content);
+        }else{
+          // Not to lose the cursor on the current contenteditable element
+          $('span.phrasable[data-url="'+ url +'"]').not(record).html(content);
+        }
+        userTriggeredPhrasingDOMChange = true;
+
+        if (Object.size(timer_status) === 0){
+          statusBubbleWidget.saved();
+        }
+      },
+      error: function(e){
+        statusBubbleWidget.error();
+      }
+    });
+  }
+
+  if(localStorage.getItem(Phrasing.EDIT_MODE_KEY) === undefined){
+    localStorage.setItem(Phrasing.EDIT_MODE_KEY, 'true');
+  }
+
+  if(localStorage.getItem(Phrasing.EDIT_MODE_KEY) == 'true'){
+    $('#edit-mode-onoffswitch').prop('checked', true).change();
+  }else{
+    $('#edit-mode-onoffswitch').prop('checked', false).change();
+  }
+
+  function disable_links() {
+    $('a').on("click.phrasing", function(e){
+      if($(this).find('span').hasClass('phrasable')) {
+        e.preventDefault();
+      }
+    });
+  }
+
+  function enable_links() {
+    $('a').off('click.phrasing')
+  }
+};
+
+$(document).ready(phrasing_setup);
+
+$(document).on('page:before-change', function() {
+  Phrasing.Bus.off();
+});
 /*
 Turbolinks 5.2.0
 Copyright © 2018 Basecamp, LLC
@@ -12762,489 +13245,6 @@ null},increment:function(a){this.getLast(a).inputs++},remove:function(a){a=this.
 CKEDITOR.config.wsc_customDictionaryIds||"";a.config.wsc_userDictionaryName=a.config.wsc_userDictionaryName||CKEDITOR.config.wsc_userDictionaryName||"";a.config.wsc_customLoaderScript=a.config.wsc_customLoaderScript||CKEDITOR.config.wsc_customLoaderScript;a.config.wsc_interfaceLang=a.config.wsc_interfaceLang;CKEDITOR.config.wsc_cmd=a.config.wsc_cmd||CKEDITOR.config.wsc_cmd||"spell";CKEDITOR.config.wsc_version="v4.3.0-master-d769233";CKEDITOR.config.wsc_removeGlobalVariable=!0},onLoad:function(a){"moono-lisa"==
 (CKEDITOR.skinName||a.config.skin)&&CKEDITOR.document.appendStyleSheet(this.path+"skins/"+CKEDITOR.skin.name+"/wsc.css")},init:function(a){var b=CKEDITOR.env;this.parseConfig(a);this.parseApi(a);a.addCommand("checkspell",new CKEDITOR.dialogCommand("checkspell")).modes={wysiwyg:!CKEDITOR.env.opera&&!CKEDITOR.env.air&&document.domain==window.location.hostname&&!(b.ie&&(8>b.version||b.quirks))};"undefined"==typeof a.plugins.scayt&&a.ui.addButton&&a.ui.addButton("SpellChecker",{label:a.lang.wsc.toolbar,
 click:function(a){var b=a.elementMode==CKEDITOR.ELEMENT_MODE_INLINE?a.container.getText():a.document.getBody().getText();(b=b.replace(/\s/g,""))?a.execCommand("checkspell"):alert("Nothing to check!")},toolbar:"spellchecker,10"});CKEDITOR.dialog.add("checkspell",this.path+(CKEDITOR.env.ie&&7>=CKEDITOR.env.version?"dialogs/wsc_ie.js":window.postMessage?"dialogs/wsc.js":"dialogs/wsc_ie.js"))}});CKEDITOR.config.plugins='dialogui,dialog,about,a11yhelp,dialogadvtab,basicstyles,bidi,blockquote,button,toolbar,notification,clipboard,panelbutton,panel,floatpanel,colorbutton,colordialog,templates,menu,contextmenu,copyformatting,div,resize,elementspath,enterkey,entities,popup,filebrowser,find,fakeobjects,flash,floatingspace,listblock,richcombo,font,forms,format,horizontalrule,htmlwriter,iframe,wysiwygarea,image,indent,indentblock,indentlist,smiley,justify,menubutton,language,link,list,liststyle,magicline,maximize,newpage,pagebreak,pastetext,pastefromword,preview,print,removeformat,save,selectall,showblocks,showborders,sourcearea,specialchar,scayt,stylescombo,tab,table,tabletools,tableselection,undo,wsc';CKEDITOR.config.skin='moono-lisa';(function() {var setIcons = function(icons, strip) {var path = CKEDITOR.getUrl( 'plugins/' + strip );icons = icons.split( ',' );for ( var i = 0; i < icons.length; i++ )CKEDITOR.skin.icons[ icons[ i ] ] = { path: path, offset: -icons[ ++i ], bgsize : icons[ ++i ] };};if (CKEDITOR.env.hidpi) setIcons('about,0,,bold,24,,italic,48,,strike,72,,subscript,96,,superscript,120,,underline,144,,bidiltr,168,,bidirtl,192,,blockquote,216,,copy-rtl,240,,copy,264,,cut-rtl,288,,cut,312,,paste-rtl,336,,paste,360,,bgcolor,384,,textcolor,408,,templates-rtl,432,,templates,456,,copyformatting,480,,creatediv,504,,find-rtl,528,,find,552,,replace,576,,flash,600,,button,624,,checkbox,648,,form,672,,hiddenfield,696,,imagebutton,720,,radio,744,,select-rtl,768,,select,792,,textarea-rtl,816,,textarea,840,,textfield-rtl,864,,textfield,888,,horizontalrule,912,,iframe,936,,image,960,,indent-rtl,984,,indent,1008,,outdent-rtl,1032,,outdent,1056,,smiley,1080,,justifyblock,1104,,justifycenter,1128,,justifyleft,1152,,justifyright,1176,,language,1200,,anchor-rtl,1224,,anchor,1248,,link,1272,,unlink,1296,,bulletedlist-rtl,1320,,bulletedlist,1344,,numberedlist-rtl,1368,,numberedlist,1392,,maximize,1416,,newpage-rtl,1440,,newpage,1464,,pagebreak-rtl,1488,,pagebreak,1512,,pastetext-rtl,1536,,pastetext,1560,,pastefromword-rtl,1584,,pastefromword,1608,,preview-rtl,1632,,preview,1656,,print,1680,,removeformat,1704,,save,1728,,selectall,1752,,showblocks-rtl,1776,,showblocks,1800,,source-rtl,1824,,source,1848,,specialchar,1872,,scayt,1896,,table,1920,,redo-rtl,1944,,redo,1968,,undo-rtl,1992,,undo,2016,,spellchecker,2040,','icons_hidpi.png');else setIcons('about,0,auto,bold,24,auto,italic,48,auto,strike,72,auto,subscript,96,auto,superscript,120,auto,underline,144,auto,bidiltr,168,auto,bidirtl,192,auto,blockquote,216,auto,copy-rtl,240,auto,copy,264,auto,cut-rtl,288,auto,cut,312,auto,paste-rtl,336,auto,paste,360,auto,bgcolor,384,auto,textcolor,408,auto,templates-rtl,432,auto,templates,456,auto,copyformatting,480,auto,creatediv,504,auto,find-rtl,528,auto,find,552,auto,replace,576,auto,flash,600,auto,button,624,auto,checkbox,648,auto,form,672,auto,hiddenfield,696,auto,imagebutton,720,auto,radio,744,auto,select-rtl,768,auto,select,792,auto,textarea-rtl,816,auto,textarea,840,auto,textfield-rtl,864,auto,textfield,888,auto,horizontalrule,912,auto,iframe,936,auto,image,960,auto,indent-rtl,984,auto,indent,1008,auto,outdent-rtl,1032,auto,outdent,1056,auto,smiley,1080,auto,justifyblock,1104,auto,justifycenter,1128,auto,justifyleft,1152,auto,justifyright,1176,auto,language,1200,auto,anchor-rtl,1224,auto,anchor,1248,auto,link,1272,auto,unlink,1296,auto,bulletedlist-rtl,1320,auto,bulletedlist,1344,auto,numberedlist-rtl,1368,auto,numberedlist,1392,auto,maximize,1416,auto,newpage-rtl,1440,auto,newpage,1464,auto,pagebreak-rtl,1488,auto,pagebreak,1512,auto,pastetext-rtl,1536,auto,pastetext,1560,auto,pastefromword-rtl,1584,auto,pastefromword,1608,auto,preview-rtl,1632,auto,preview,1656,auto,print,1680,auto,removeformat,1704,auto,save,1728,auto,selectall,1752,auto,showblocks-rtl,1776,auto,showblocks,1800,auto,source-rtl,1824,auto,source,1848,auto,specialchar,1872,auto,scayt,1896,auto,table,1920,auto,redo-rtl,1944,auto,redo,1968,auto,undo-rtl,1992,auto,undo,2016,auto,spellchecker,2040,auto','icons.png');})();CKEDITOR.lang.languages={"af":1,"sq":1,"ar":1,"az":1,"eu":1,"bn":1,"bs":1,"bg":1,"ca":1,"zh-cn":1,"zh":1,"hr":1,"cs":1,"da":1,"nl":1,"en":1,"en-au":1,"en-ca":1,"en-gb":1,"eo":1,"et":1,"fo":1,"fi":1,"fr":1,"fr-ca":1,"gl":1,"ka":1,"de":1,"de-ch":1,"el":1,"gu":1,"he":1,"hi":1,"hu":1,"is":1,"id":1,"it":1,"ja":1,"km":1,"ko":1,"ku":1,"lv":1,"lt":1,"mk":1,"ms":1,"mn":1,"no":1,"nb":1,"oc":1,"fa":1,"pl":1,"pt-br":1,"pt":1,"ro":1,"ru":1,"sr":1,"sr-latn":1,"si":1,"sk":1,"sl":1,"es":1,"es-mx":1,"sv":1,"tt":1,"th":1,"tr":1,"ug":1,"uk":1,"vi":1,"cy":1};}());
-var editor = (function() {
-
-	// Editor elements
-	var headerField, contentField, cleanSlate, lastType, currentNodeList, savedSelection;
-
-	// Editor Bubble elements
-	var textOptions, optionsBox, boldButton, italicButton, quoteButton, urlButton, urlInput;
-
-
-	function init() {
-		if ($('#zenpenbubble').length){
-			lastRange = 0;
-			bindElements();
-
-			// Set cursor position
-			var range = document.createRange();
-			var selection = window.getSelection();
-			// range.setStart(headerField, 1);
-			selection.removeAllRanges();
-			selection.addRange(range);
-
-			createEventBindings();
-		}
-	}
-
-	function createEventBindings( on ) {
-
-		// Key up bindings
-		document.onkeyup = checkTextHighlighting;
-
-		// Mouse bindings
-		document.onmousedown = checkTextHighlighting;
-		document.onmouseup = function( event ) {
-
-			setTimeout( function() {
-				checkTextHighlighting( event );
-			}, 1);
-		};
-
-		// Window bindings
-		window.addEventListener( 'resize', function( event ) {
-			updateBubblePosition();
-		});
-
-		// Scroll bindings. We limit the events, to free the ui
-		// thread and prevent stuttering. See:
-		// http://ejohn.org/blog/learning-from-twitter
-		var scrollEnabled = true;
-		document.body.addEventListener( 'scroll', function() {
-
-			if ( !scrollEnabled ) {
-				return;
-			}
-
-			scrollEnabled = true;
-
-			updateBubblePosition();
-
-			return setTimeout((function() {
-				scrollEnabled = true;
-			}), 250);
-		});
-	}
-
-	function bindElements() {
-
-		contentField = document.querySelector( '.content' );
-		textOptions = document.querySelector( '.text-options' );
-
-		optionsBox = textOptions.querySelector( '.options' );
-
-		boldButton = textOptions.querySelector( '.bold' );
-		boldButton.onclick = onBoldClick;
-
-		italicButton = textOptions.querySelector( '.italic' );
-		italicButton.onclick = onItalicClick;
-
-		// quoteButton = textOptions.querySelector( '.quote' );
-		// quoteButton.onclick = onQuoteClick;
-
-		urlButton = textOptions.querySelector( '.url' );
-		urlButton.onmousedown = onUrlClick;
-
-		urlInput = textOptions.querySelector( '.url-input' );
-		urlInput.onblur = onUrlInputBlur;
-		urlInput.onkeydown = onUrlInputKeyDown;
-	}
-
-	function checkTextHighlighting( event ) {
-
-		var selection = window.getSelection();
-
-		if (event.target.className === "url-input" || (typeof event.target.classList !== 'undefined' && event.target.classList.contains("url"))) {
-			currentNodeList = findNodes( selection.focusNode );
-			updateBubbleStates();
-			return;
-		}
-
-		if (event.target.parentNode.classList != null){
-			if (event.target.parentNode.classList.contains("ui-inputs")){
-				currentNodeList = findNodes( selection.focusNode );
-				updateBubbleStates();
-				return;
-			}
-		}
-
-		// Check selections exist
-		if ( selection.isCollapsed === true && lastType === false ) {
-			onSelectorBlur();
-		}
-
-		// Text is selected
-		if ( selection.isCollapsed === false ) {
-
-			currentNodeList = findNodes( selection.focusNode );
-			// Find if highlighting is in the editable area
-			if (isContentEditable(selection.focusNode) == true) {
-				updateBubbleStates();
-				updateBubblePosition();
-
-				// Show the ui bubble
-				textOptions.className = "text-options active";
-			}
-		}
-
-		lastType = selection.isCollapsed;
-	}
-
-	function updateBubblePosition() {
-		var selection = window.getSelection();
-		var range = selection.getRangeAt(0);
-		var boundary = range.getBoundingClientRect();
-
-		textOptions.style.top = boundary.top - 5 + window.pageYOffset + "px";
-		textOptions.style.left = (boundary.left + boundary.right)/2 + "px";
-	}
-
-	function updateBubbleStates() {
-
-		// It would be possible to use classList here, but I feel that the
-		// browser support isn't quite there, and this functionality doesn't
-		// warrent a shim.
-
-		if ( hasNode( currentNodeList, 'B') ) {
-			boldButton.className = "bold active"
-		} else {
-			boldButton.className = "bold"
-		}
-
-		if ( hasNode( currentNodeList, 'I') ) {
-			italicButton.className = "italic active"
-		} else {
-			italicButton.className = "italic"
-		}
-
-		// if ( hasNode( currentNodeList, 'BLOCKQUOTE') ) {
-		// 	quoteButton.className = "quote active"
-		// } else {
-		// 	quoteButton.className = "quote"
-		// }
-
-		if ( hasNode( currentNodeList, 'A') ) {
-			urlButton.className = "url useicons active"
-		} else {
-			urlButton.className = "url useicons"
-		}
-	}
-
-	function onSelectorBlur() {
-
-		textOptions.className = "text-options fade";
-		setTimeout( function() {
-
-			if (textOptions.className == "text-options fade") {
-
-				textOptions.className = "text-options";
-				textOptions.style.top = '-999px';
-				textOptions.style.left = '-999px';
-			}
-		}, 260 )
-	}
-
-	function findNodes( element ) {
-
-		var nodeNames = {};
-
-		while ( element.parentNode ) {
-
-			nodeNames[element.nodeName] = true;
-			element = element.parentNode;
-
-			if ( element.nodeName === 'A' ) {
-				nodeNames.url = element.getAttribute("href");
-			}
-		}
-
-		return nodeNames;
-	}
-
-	function isContentEditable(element){
-		//if any of its parents has the class of 'phrasable' go hooray
-		while ( element.parentNode ) {
-			if (element.className !== undefined){
-				if (
-						element.className.indexOf("phrasable")>=0 &&
-						element.className.indexOf("phrasable-on")>=0
-				){
-					return true;
-				}
-			}
-			element = element.parentNode;
-		}
-		return false;
-	}
-
-	function hasNode( nodeList, name ) {
-		return !!nodeList[ name ];
-	}
-
-
-	function onBoldClick() {
-		document.execCommand( 'bold', false );
-	}
-
-	function onItalicClick() {
-		document.execCommand( 'italic', false );
-	}
-
-	// function onQuoteClick() {
-
-	// 	var nodeNames = findNodes( window.getSelection().focusNode );
-
-	// 	if ( hasNode( nodeNames, 'BLOCKQUOTE' ) ) {
-	// 		document.execCommand( 'formatBlock', false, 'p' );
-	// 		document.execCommand( 'outdent' );
-	// 	} else {
-	// 		document.execCommand( 'formatBlock', false, 'blockquote' );
-	// 	}
-	// }
-
-	function onUrlClick() {
-
-		if ( optionsBox.className == 'options' ) {
-
-			optionsBox.className = 'options url-mode';
-
-			// Set timeout here to debounce the focus action
-			setTimeout( function() {
-
-				var nodeNames = findNodes( window.getSelection().focusNode );
-
-				if ( hasNode( nodeNames , "A" ) ) {
-					urlInput.value = nodeNames.url;
-				} else {
-					// Symbolize text turning into a link, which is temporary, and will never be seen.
-					document.execCommand( 'createLink', false, '/' );
-				}
-
-				// Since typing in the input box kills the highlighted text we need
-				// to save this selection, to add the url link if it is provided.
-				lastSelection = window.getSelection().getRangeAt(0);
-				lastType = false;
-
-				urlInput.focus();
-
-			}, 100);
-
-		} else {
-
-			optionsBox.className = 'options';
-		}
-	}
-
-	function onUrlInputKeyDown( event ) {
-
-		if ( event.keyCode === 13 ) {
-			event.preventDefault();
-			applyURL( urlInput.value );
-			urlInput.blur();
-		}
-	}
-
-	function onUrlInputBlur( event ) {
-
-		optionsBox.className = 'options';
-		applyURL( urlInput.value );
-		urlInput.value = '';
-
-		currentNodeList = findNodes( window.getSelection().focusNode );
-		updateBubbleStates();
-	}
-
-	function applyURL( url ) {
-
-		rehighlightLastSelection();
-
-		// Unlink any current links
-		document.execCommand( 'unlink', false );
-		if (url !== "") {
-			document.execCommand( 'createLink', false, url );
-		}
-	}
-
-	function rehighlightLastSelection() {
-
-		window.getSelection().removeAllRanges();
-		window.getSelection().addRange( lastSelection );
-	}
-
-	return {
-		init: init
-	}
-
-})();
-
-var Phrasing = {
-  Bus : $({}),
-  EDIT_MODE_KEY : 'editing-mode'
-};
-
-Phrasing.isEditModeEnabled = function(){
-  return localStorage.getItem(this.EDIT_MODE_KEY) === "true";
-};
-
-function StatusBubbleWidget(options){
-  this.$statusText       = options.$statusText;
-  this.$statusIndicator  = options.$statusIndicator;
-  this.$editModeChechbox = options.$editModeChechbox;
-  this._init();
-}
-
-StatusBubbleWidget.prototype = {
-  _init : function(){
-    this.$editModeChechbox.on('change', function(){
-      if(this.checked){
-        Phrasing.Bus.trigger('phrasing:edit-mode:on');
-      }else{
-        Phrasing.Bus.trigger('phrasing:edit-mode:off');
-      }
-    });
-  },
-
-  _alterStatus : function(text, color){
-    this.$statusText.text(text);
-    this.$statusIndicator.css('background-color', color);
-  },
-
-  saving : function(){
-    this._alterStatus('Saving', 'orange');
-  },
-
-  saved : function(){
-    this._alterStatus('Saved', '#56AE45');
-  },
-
-  error : function(){
-    this._alterStatus('Error', 'red');
-  }
-};
-
-var phrasing_setup = function(){
-  var statusBubbleWidget = new StatusBubbleWidget({
-    $statusText       : $('#phrasing-edit-mode-bubble #phrasing-saved-status-headline p'),
-    $statusIndicator  : $('#phrasing-saved-status-indicator-circle'),
-    $editModeChechbox : $('#edit-mode-onoffswitch')
-  });
-
-  Phrasing.Bus.on('phrasing:edit-mode:on', function(){
-    $('.phrasable').addClass("phrasable-on").attr("contenteditable", 'true');
-    localStorage.setItem(Phrasing.EDIT_MODE_KEY, 'true');
-    disable_links();
-  });
-
-  Phrasing.Bus.on('phrasing:edit-mode:off', function(){
-    $('.phrasable').removeClass("phrasable-on").attr("contenteditable", "false");
-    localStorage.setItem(Phrasing.EDIT_MODE_KEY, "false");
-    enable_links();
-  });
-
-  // Initialize the editing bubble
-  editor.init();
-
-  // Making sure to send csrf token from layout file.
-  $(document).ajaxSend(function(e, xhr, options) {
-    var token = $("meta[name='csrf-token']").attr("content");
-    xhr.setRequestHeader("X-CSRF-Token", token);
-  });
-
-  // Hash size function
-  Object.size = function(obj){
-    var size = 0, key;
-    for (key in obj) { if (obj.hasOwnProperty(key)) size++; }
-    return size;
-  };
-
-  // Trigger AJAX on textchange
-  var userTriggeredPhrasingDOMChange = true;
-  var timer = {};
-  var timer_status = {};
-
-  $('.phrasable').on('DOMNodeInserted DOMNodeRemoved DOMCharacterDataModified', function(e){
-    if (userTriggeredPhrasingDOMChange === false){
-      return;
-    }
-
-    statusBubbleWidget.saving();
-
-    var record = this;
-
-    clearTimeout(timer[$(record).data("url")]);
-    timer_status[$(record).data("url")] = 0;
-
-    timer[$(record).data("url")] = setTimeout(function(){
-      savePhraseViaAjax(record);
-      delete timer_status[$(record).data("url")];
-    },2500);
-
-    timer_status[$(record).data("url")] = 1;
-  });
-
-  // AJAX Request
-  function savePhraseViaAjax(record){
-
-    var url = $(record).data("url");
-
-    var content = record.innerHTML;
-
-    if(content.length === 0){
-      content = "Empty";
-    }
-
-    $.ajax({
-      type: "PUT",
-      url: url,
-      data: { new_value: content },
-      success: function(e){
-        userTriggeredPhrasingDOMChange = false;
-        if(content === "Empty"){
-          $('span.phrasable[data-url="'+ url +'"]').html(content);
-        }else{
-          // Not to lose the cursor on the current contenteditable element
-          $('span.phrasable[data-url="'+ url +'"]').not(record).html(content);
-        }
-        userTriggeredPhrasingDOMChange = true;
-
-        if (Object.size(timer_status) === 0){
-          statusBubbleWidget.saved();
-        }
-      },
-      error: function(e){
-        statusBubbleWidget.error();
-      }
-    });
-  }
-
-  if(localStorage.getItem(Phrasing.EDIT_MODE_KEY) === undefined){
-    localStorage.setItem(Phrasing.EDIT_MODE_KEY, 'true');
-  }
-
-  if(localStorage.getItem(Phrasing.EDIT_MODE_KEY) == 'true'){
-    $('#edit-mode-onoffswitch').prop('checked', true).change();
-  }else{
-    $('#edit-mode-onoffswitch').prop('checked', false).change();
-  }
-
-  function disable_links() {
-    $('a').on("click.phrasing", function(e){
-      if($(this).find('span').hasClass('phrasable')) {
-        e.preventDefault();
-      }
-    });
-  }
-
-  function enable_links() {
-    $('a').off('click.phrasing')
-  }
-};
-
-$(document).ready(phrasing_setup);
-
-$(document).on('page:before-change', function() {
-  Phrasing.Bus.off();
-});
 /*! cash-dom 1.3.5, https://github.com/kenwheeler/cash @license MIT */
 
 (function (factory) {

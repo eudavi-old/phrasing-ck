@@ -2,7 +2,7 @@
 .titulo{
     font-weight: bold;
     color: #00CAE5 !important;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
 }
 
 .card-botao{
@@ -14,10 +14,9 @@ img {
     height: auto;
 }
 
-/*iframe {
-    height: 383px !important;
-    width: 90% !important;
-}*/
+.margem{
+    margin-bottom: 20px;
+}
 
 .justificar{
     text-align: justify;

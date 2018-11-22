@@ -7,6 +7,6 @@ module PhrasingHelper
   # end
 
   def can_edit_phrases?
-    current_user.present? and current_user.admin
+    current_user.admin?
   end
 end

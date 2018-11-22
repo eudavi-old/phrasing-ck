@@ -5,7 +5,7 @@ class CreatePosts < ActiveRecord::Migration[5.1]
       t.string :capa
       t.string :resumo
       t.string :descricao
-
+      t.string :video
       t.timestamps
     end
   end
